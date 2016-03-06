@@ -1,6 +1,8 @@
 import React from 'react-native';
 import {colors, fonts} from '../theme';
 import {px, vw, vh, dpi} from '../screen';
+import * as GameState from '../scenes/game/GameState';
+
 const {
   LayoutAnimation,
   TouchableOpacity,
@@ -37,6 +39,12 @@ const Question = React.createClass({
     this.setState({value});
   },
 
+  attemptAnswer() {
+    const answer = this.state.value;
+    this.props.dispatch(GameState.attemptAnswer(answer));
+    this.props.navigateToAnswer();
+  },
+
   render() {
     const value = this.state.value;
     return (
@@ -57,16 +65,16 @@ const Question = React.createClass({
           <View style={[styles.border, value === '' && styles.placeholderBorder]} />
         </View>
         {!!value &&
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.attemptAnswer}>
             <Text style={styles.answerButton}>
               THIS IS IT
             </Text>
           </TouchableOpacity>
         }
         <TouchableOpacity onPress={this.props.navigateBack}>
-        <Text style={styles.backButton}>
-          BACK TO CLUE
-        </Text>
+          <Text style={styles.backButton}>
+            BACK TO CLUE
+          </Text>
         </TouchableOpacity>
       </View>
     );

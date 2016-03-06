@@ -31,11 +31,7 @@ const GameView = React.createClass({
         <ExNavigator
           sceneStyle={{backgroundColor: 'transparent'}}
           showNavigationBar={false}
-          initialRoute={GameRouter.getQuestionRoute({
-            levelIndex: this.props.levelIndex,
-            levelClue: this.props.levelClue,
-            dispatch: this.props.dispatch
-          })}
+          initialRoute={GameRouter.getQuestionRoute()}
         />
       </View>
     );

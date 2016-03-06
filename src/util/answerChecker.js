@@ -6,7 +6,7 @@ export function check(attempt, hash, isExact) {
     return isCorrect(attempt, correct, isExact);
   }
   if (_.isArray(correct)) {
-    return _.any(correct, option => isCorrect(attempt, option, isExact));
+    return _.some(correct, option => isCorrect(attempt, option, isExact));
   }
 }
 
