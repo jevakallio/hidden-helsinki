@@ -1,10 +1,12 @@
 import React from 'react-native';
 import {colors, fonts} from '../../theme';
+import {vw, vh} from '../../screen';
 import * as GameState from '../game/GameState';
 const {
   StyleSheet,
   PropTypes,
   TouchableOpacity,
+  Image,
   View,
   Text
 } = React;
@@ -25,12 +27,15 @@ const HomeView = React.createClass({
 
   render() {
     return (
-      <View style={styles.container}>
+      <Image
+        source={require('../../../images/splash.jpg')}
+        style={styles.container}
+      >
         <TouchableOpacity onPress={() => this.props.dispatch(GameState.startGame())}>
           <Text style={styles.title}>Hidden Helsinki</Text>
           <Text style={styles.subtitle}>TAP TO PLAY</Text>
         </TouchableOpacity>
-      </View>
+      </Image>
     );
   }
 });
@@ -40,11 +45,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.magenta
+    width: vw(100),
+    height: vh(100),
+    backgroundColor: 'transparent'
   },
   title: {
     ...fonts.title,
-    textAlign: 'center'
+    color: colors.white,
+    textAlign: 'center',
+    marginBottom: vh(20)
   },
   subtitle: {
     ...fonts.small,
