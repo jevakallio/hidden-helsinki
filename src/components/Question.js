@@ -1,5 +1,5 @@
 import React from 'react-native';
-import {colors, fonts} from '../theme';
+import {fonts} from '../theme';
 import {px} from '../screen';
 const {
   StyleSheet,
@@ -14,13 +14,17 @@ const Question = React.createClass({
   propTypes: {
     levelIndex: PropTypes.number.isRequired,
     levelClue: PropTypes.string.isRequired,
+    navigateToAnswerInput: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired
   },
 
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.clueContainer}>
+        <TouchableOpacity
+          onPress={this.props.navigateToAnswerInput}
+          style={styles.clueContainer}
+          >
           <Text style={styles.clue}>
             {this.props.levelClue}
           </Text>
@@ -40,7 +44,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.yellow
+    backgroundColor: 'transparent'
   },
   clueContainer: {
     padding: px(40)

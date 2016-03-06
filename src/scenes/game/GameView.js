@@ -29,6 +29,7 @@ const GameView = React.createClass({
     return (
       <View style={styles.container}>
         <ExNavigator
+          sceneStyle={{backgroundColor: 'transparent'}}
           showNavigationBar={false}
           initialRoute={GameRouter.getQuestionRoute({
             levelIndex: this.props.levelIndex,
@@ -43,7 +44,8 @@ const GameView = React.createClass({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: colors.yellow
   }
 });
 
