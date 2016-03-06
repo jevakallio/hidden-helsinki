@@ -1,8 +1,6 @@
 import {connect} from 'react-redux';
 import AppView from './AppView';
 
-const container = connect(
-  state => state.get('app').toObject()
-);
+const container = connect();
 
 export default container(AppView);

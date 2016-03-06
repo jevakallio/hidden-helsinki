@@ -1,19 +1,21 @@
 import {createStore, applyMiddleware} from 'redux';
 import {combineReducers} from 'redux-immutablejs';
 import {Map} from 'immutable';
+import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
-import app from './scenes/app/AppState';
+import game from './scenes/game/GameState';
 
 // register middleware
-
+const logger = createLogger();
 const createStoreWithMiddleware = applyMiddleware(
-  createLogger()
+  thunk,
+  logger
 )(createStore);
 
 // combine reducers
 
 const reducer = combineReducers({
-  app
+  game
 });
 
 // create store

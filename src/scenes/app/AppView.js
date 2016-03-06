@@ -1,20 +1,17 @@
 import React from 'react-native';
+import ExNavigator from '@exponent/react-native-navigator';
+import * as AppRouter from './AppRouter';
 
-const {
-  Component,
-  View,
-  Text
-} = React;
-
-class AppView extends Component {
-  displayName: 'HomeView';
+const AppView = React.createClass({
+  displayName: 'AppView',
   render() {
     return (
-      <View>
-        <Text>HEL</Text>
-      </View>
+      <ExNavigator
+        showNavigationBar={false}
+        initialRoute={AppRouter.getHomeRoute()}
+      />
     );
   }
-}
+});
 
 export default AppView;
