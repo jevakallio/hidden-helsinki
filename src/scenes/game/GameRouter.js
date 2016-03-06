@@ -3,36 +3,36 @@
 import React, {Navigator} from 'react-native';
 import {connect} from 'react-redux';
 import Question from '../../components/Question';
-import AnswerInput from '../../components/AnswerInput';
-import AnswerExplanation from '../../components/AnswerExplanation';
+import AnswerInputScreen from '../../components/AnswerInputScreen';
+import AnswerExplanationScreen from '../../components/AnswerExplanationScreen';
 
 const connectGameState = connect(
   state => state.get('game').toObject()
 );
 const QuestionContainer = connectGameState(Question);
-const AnswerInputContainer = connectGameState(AnswerInput);
-const AnswerExplanationContainer = connectGameState(AnswerExplanation);
+const AnswerInputScreenContainer = connectGameState(AnswerInputScreen);
+const AnswerExplanationScreenContainer = connectGameState(AnswerExplanationScreen);
 
 export function getQuestionRoute() {
   return {
     renderScene(navigator) {
       return (
         <QuestionContainer
-          navigateToAnswerInput={() => navigator.push(getAnswerInputRoute())}
+          navigateToAnswerInputScreen={() => navigator.push(getAnswerInputScreenRoute())}
         />
       );
     }
   };
 }
 
-export function getAnswerInputRoute() {
+export function getAnswerInputScreenRoute() {
   return {
     configureScene() {
       return Navigator.SceneConfigs.VerticalUpSwipeJump;
     },
     renderScene(navigator) {
       return (
-        <AnswerInputContainer
+        <AnswerInputScreenContainer
           navigateBack={() => navigator.pop()}
           navigateToAnswer={() => navigator.push(getExplanationRoute())}
         />
@@ -48,7 +48,7 @@ export function getExplanationRoute() {
     },
     renderScene(navigator) {
       return (
-        <AnswerExplanationContainer
+        <AnswerExplanationScreenContainer
           navigateBack={() => navigator.pop()}
         />
       );

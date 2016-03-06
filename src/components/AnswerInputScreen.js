@@ -2,13 +2,13 @@ import React from 'react-native';
 import {colors, fonts} from '../theme';
 import {px, vw, vh, dpi} from '../screen';
 import * as GameState from '../scenes/game/GameState';
+import AnswerInputBox from './AnswerInputBox';
 
 const {
   LayoutAnimation,
   TouchableOpacity,
   StyleSheet,
   PropTypes,
-  TextInput,
   Text,
   View
 } = React;
@@ -16,8 +16,8 @@ const {
 const INPUT_PADDING = vw(10);
 const PLACEHOLDER_COLOR = 'rgba(255, 255, 255, 0.4)';
 
-const Question = React.createClass({
-  displayName: 'Question',
+const AnswerInputScreen = React.createClass({
+  displayName: 'AnswerInputScreen',
   propTypes: {
     levelIndex: PropTypes.number.isRequired,
     navigateBack: PropTypes.func.isRequired,
@@ -49,21 +49,10 @@ const Question = React.createClass({
     const value = this.state.value;
     return (
       <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.answerInput}
-            value={value}
-            onChangeText={this.onChangeText}
-            placeholder='Your answer'
-            placeholderTextColor={PLACEHOLDER_COLOR}
-            autoCapitalize='none'
-            autoCorrect={false}
-            keyboardType='default'
-            returnKeyType='done'
-            autoFocus={true}
-            />
-          <View style={[styles.border, value === '' && styles.placeholderBorder]} />
-        </View>
+        <AnswerInputBox
+          value={value}
+          onChangeText={this.onChangeText}
+        />
         {!!value &&
           <TouchableOpacity onPress={this.attemptAnswer}>
             <Text style={styles.answerButton}>
@@ -95,14 +84,6 @@ const styles = StyleSheet.create({
     right: INPUT_PADDING,
     top: vh(30)
   },
-  answerInput: {
-    ...fonts.large,
-    textAlign: 'center',
-    backgroundColor: 'transparent',
-    width: vw(100) - INPUT_PADDING * 2,
-    height: px(90)
-  },
-
   backButton: {
     ...fonts.small,
     fontWeight: '100',
@@ -117,17 +98,7 @@ const styles = StyleSheet.create({
     padding: px(40),
     marginTop: px(80),
     marginBottom: px(40)
-  },
-
-  border: {
-    marginTop: px(40),
-    width: vw(100) - INPUT_PADDING * 2,
-    backgroundColor: colors.white,
-    height: dpi(2)
-  },
-  placeholderBorder: {
-    backgroundColor: PLACEHOLDER_COLOR
   }
 });
 
-export default Question;
+export default AnswerInputScreen;

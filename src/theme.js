@@ -10,7 +10,7 @@ export const colors = {
 };
 
 export const fonts = {
-  title: {...baseFont(220), lineHeight: px(220), fontWeight: 'bold'},
+  title: {...baseFont(220), fontWeight: 'bold'},
   large: baseFont(120),
   medium: baseFont(80),
   small: baseFont(40)
@@ -20,6 +20,6 @@ function baseFont(size) {
   return {
     color: colors.white,
     fontFamily: 'System',
-    fontSize: px(size)
+    fontSize: Math.floor(px(size))
   };
 }

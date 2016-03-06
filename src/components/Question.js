@@ -14,7 +14,7 @@ const Question = React.createClass({
   propTypes: {
     levelIndex: PropTypes.number.isRequired,
     levelClue: PropTypes.string.isRequired,
-    navigateToAnswerInput: PropTypes.func.isRequired,
+    navigateToAnswerInputScreen: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired
   },
 
@@ -22,7 +22,7 @@ const Question = React.createClass({
     return (
       <View style={styles.container}>
         <TouchableOpacity
-          onPress={this.props.navigateToAnswerInput}
+          onPress={this.props.navigateToAnswerInputScreen}
           style={styles.clueContainer}
           >
           <Text style={styles.clue}>

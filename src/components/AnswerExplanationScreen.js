@@ -8,8 +8,8 @@ const {
   Text
 } = React;
 
-const AnswerExplanation = React.createClass({
-  displayName: 'AnswerExplanation',
+const AnswerExplanationScreen = React.createClass({
+  displayName: 'AnswerExplanationScreen',
   propTypes: {
     levelIndex: PropTypes.number.isRequired,
     levelExplanation: PropTypes.string.isRequired,
@@ -68,4 +68,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AnswerExplanation;
+export default AnswerExplanationScreen;

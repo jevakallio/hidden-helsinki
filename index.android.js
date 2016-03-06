@@ -1,8 +1,7 @@
 import React, {AppRegistry, Component} from 'react-native';
 import {Provider} from 'react-redux';
-import ExNavigator from '@exponent/react-native-navigator';
 
-import * as router from './src/router';
+import AppContainer from './src/scenes/app/AppContainer';
 import store from './src/store';
 
 class HiddenHelsinki extends Component {
@@ -10,10 +9,7 @@ class HiddenHelsinki extends Component {
   render() {
     return (
       <Provider store={store}>
-        <ExNavigator
-          showNavigationBar={false}
-          initialRoute={router.getHomeRoute()}
-        />
+        <AppContainer />
       </Provider>
     );
   }
