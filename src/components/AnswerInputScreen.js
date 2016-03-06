@@ -5,6 +5,7 @@ import * as GameState from '../scenes/game/GameState';
 import AnswerInputBox from './AnswerInputBox';
 
 const {
+  Animated,
   LayoutAnimation,
   TouchableOpacity,
   StyleSheet,
@@ -14,7 +15,6 @@ const {
 } = React;
 
 const INPUT_PADDING = vw(10);
-const PLACEHOLDER_COLOR = 'rgba(255, 255, 255, 0.4)';
 
 const AnswerInputScreen = React.createClass({
   displayName: 'AnswerInputScreen',
@@ -22,13 +22,28 @@ const AnswerInputScreen = React.createClass({
     levelIndex: PropTypes.number.isRequired,
     navigateBack: PropTypes.func.isRequired,
     navigateToAnswer: PropTypes.func.isRequired,
+    isCheckingAnswer: PropTypes.bool.isRequired,
+    isAnswerCorrect: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
   },
 
   getInitialState() {
     return {
-      value: ''
+      value: '',
+      errorColorOpacity: new Animated.Value(0)
     };
+  },
+
+  componentWillReceiveProps({isCheckingAnswer, isAnswerCorrect}) {
+    if (this.props.isCheckingAnswer && !isCheckingAnswer && !isAnswerCorrect) {
+      this.flashError();
+    }
+  },
+
+  flashError() {
+    const opacity = this.state.errorColorOpacity;
+    opacity.setValue(1);
+    Animated.timing(opacity, {toValue: 0, duration: 2000, delay: 1000}).start();
   },
 
   onChangeText(value) {
@@ -47,8 +62,19 @@ const AnswerInputScreen = React.createClass({
 
   render() {
     const value = this.state.value;
+    const errorStyle = {
+      backgroundColor: colors.red,
+      opacity: this.state.errorColorOpacity,
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0
+    };
+
     return (
       <View style={styles.container}>
+        <Animated.View style={errorStyle} />
         <AnswerInputBox
           value={value}
           onChangeText={this.onChangeText}
@@ -60,6 +86,7 @@ const AnswerInputScreen = React.createClass({
             </Text>
           </TouchableOpacity>
         }
+        {}
         <TouchableOpacity onPress={this.props.navigateBack}>
           <Text style={styles.backButton}>
             BACK TO CLUE
@@ -89,7 +116,6 @@ const styles = StyleSheet.create({
     fontWeight: '100',
     padding: px(40)
   },
-
   answerButton: {
     ...fonts.medium,
     fontWeight: '200',

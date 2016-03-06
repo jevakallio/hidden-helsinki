@@ -1,12 +1,13 @@
 import {px} from './screen';
 
 export const colors = {
-  magenta: '#7F1637',
-  green: '#047878',
-  yellow: '#FFB733',
-  orange: '#F57336',
-  red: '#C22121',
-  white: '#FFFFFF'
+  magenta: '#F2385A',
+  yellow: '#F5A503',
+  blue: '#4AD9D9',
+  green: '#36B1BF',
+  cream: '#E9F1DF',
+  white: '#FFFFFF',
+  red: '#B01B2C'
 };
 
 export const fonts = {
