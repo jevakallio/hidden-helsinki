@@ -23,6 +23,7 @@ const GameView = React.createClass({
     levelDetailHint: PropTypes.string.isRequired,
     levelExplanation: PropTypes.string.isRequired,
     timeElapsed: PropTypes.number.isRequired,
+    isTimerZoomed: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
   },
 
@@ -46,7 +47,15 @@ const GameView = React.createClass({
           showNavigationBar={false}
           initialRoute={GameRouter.getQuestionRoute()}
         />
-        <Timer time={this.props.timeElapsed} />
+        <Timer
+          time={this.props.timeElapsed}
+          isZoomed={this.props.isTimerZoomed}
+          toggleZoom={() => {
+            this.props.dispatch(this.props.isTimerZoomed
+              ? GameState.unzoomTimer()
+              : GameState.zoomTimer());
+          }}
+          />
       </View>
     );
   }
