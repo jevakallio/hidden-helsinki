@@ -1,11 +1,12 @@
 import React from 'react-native';
 import ExNavigator from '@exponent/react-native-navigator';
+import Timer from '../../components/Timer';
 
 import * as GameRouter from './GameRouter';
+import * as GameState from './GameState';
+import * as TimeService from '../../services/TimeService';
 
 import {colors} from '../../theme';
-import {px} from '../../screen';
-
 const {
   StyleSheet,
   PropTypes,
@@ -21,11 +22,23 @@ const GameView = React.createClass({
     levelWayHint: PropTypes.string.isRequired,
     levelDetailHint: PropTypes.string.isRequired,
     levelExplanation: PropTypes.string.isRequired,
+    timeElapsed: PropTypes.number.isRequired,
     dispatch: PropTypes.func.isRequired
   },
 
-  render() {
+  componentDidMount() {
+    TimeService.timer.addListener('tick', this.updateTimer);
+  },
 
+  componentWillUnmount() {
+    TimeService.timer.removeListener('tick', this.updateTimer);
+  },
+
+  updateTimer(elapsed) {
+    this.props.dispatch(GameState.updateTimer(elapsed));
+  },
+
+  render() {
     return (
       <View style={styles.container}>
         <ExNavigator
@@ -33,6 +46,7 @@ const GameView = React.createClass({
           showNavigationBar={false}
           initialRoute={GameRouter.getQuestionRoute()}
         />
+        <Timer time={this.props.timeElapsed} />
       </View>
     );
   }

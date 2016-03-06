@@ -1,16 +1,18 @@
 import {Map} from 'immutable';
 import * as LevelService from '../../services/LevelService';
+import * as TimeService from '../../services/TimeService';
 
 const SET_LEVEL = 'game/set-level';
 const ANSWER_ATTEMPT = 'game/answer-attempt';
 const ANSWER_RESULT = 'game/answer-result';
+const UPDATE_TIMER = 'game/update-timer';
 
 const initialState = Map({
   isCheckingAnswer: false,
   isStarted: false,
   isAnswerCorrect: false,
   answerAttempt: null,
-
+  timeElapsed: 0,
   levelIndex: 0,
   levelName: null,
   levelClue: null,
@@ -34,15 +36,39 @@ export default function GameReducer(state = initialState, action = {}) {
         .set('answerAttempt', action.payload);
     case ANSWER_RESULT:
       return state
-      .set('isAnswerCorrect', action.payload)
-      .set('isCheckingAnswer', false)
+        .set('isAnswerCorrect', action.payload)
+        .set('isCheckingAnswer', false);
+    case UPDATE_TIMER:
+      return state
+        .set('timeElapsed', action.payload);
     default:
       return state;
   }
 }
 
 export function startGame() {
-  return setLevel(0);
+  TimeService.start();
+  const level = LevelService.getLevel(0);
+  return {
+    type: SET_LEVEL,
+    payload: level
+  };
+}
+
+export function setLevel(levelIndex) {
+  TimeService.resume();
+  const level = LevelService.getLevel(levelIndex);
+  return {
+    type: SET_LEVEL,
+    payload: level
+  };
+}
+
+export function updateTimer(elapsed) {
+  return {
+    type: UPDATE_TIMER,
+    payload: elapsed
+  };
 }
 
 export function attemptAnswer(answer) {
@@ -53,15 +79,11 @@ export function attemptAnswer(answer) {
     });
     const levelIndex = getState().getIn(['game', 'levelIndex']);
     const isCorrect = await LevelService.checkAnswer(levelIndex, answer);
-    dispatch({type: ANSWER_RESULT, payload: isCorrect});
-  };
-}
 
-// actions
-export function setLevel(levelIndex) {
-  const level = LevelService.getLevel(levelIndex);
-  return {
-    type: SET_LEVEL,
-    payload: level
+    if (isCorrect) {
+      TimeService.pause();
+    }
+
+    dispatch({type: ANSWER_RESULT, payload: isCorrect});
   };
 }
