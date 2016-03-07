@@ -19,9 +19,13 @@ const initialState = Map({
   levelIndex: 0,
   levelName: null,
   levelClue: null,
+  levelClueFontSize: null,
   levelWayHint: null,
   levelDetailHint: null,
-  levelExplanation: null
+  levelExplanation: null,
+  levelExplanationFontSize: null,
+  levelColor: null,
+  levelImage: null
 });
 
 // reducer

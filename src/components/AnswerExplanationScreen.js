@@ -1,6 +1,7 @@
 import React from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import * as GameState from '../scenes/game/GameState';
+import {getLevelImage} from '../util/levelImages';
 import {fonts, colors, transparent} from '../theme';
 import {px, vw, vh, screenHeight} from '../screen';
 const {
@@ -19,6 +20,9 @@ const AnswerExplanationScreen = React.createClass({
   propTypes: {
     levelIndex: PropTypes.number.isRequired,
     levelExplanation: PropTypes.string.isRequired,
+    levelColor: PropTypes.string.isRequired,
+    levelImage: PropTypes.string.isRequired,
+    levelExplanationFontSize: PropTypes.number.isRequired,
     isAnswerCorrect: PropTypes.bool.isRequired,
     isTimerZoomed: PropTypes.bool.isRequired,
     isCheckingAnswer: PropTypes.bool.isRequired,
@@ -86,6 +90,8 @@ const AnswerExplanationScreen = React.createClass({
       })
     };
 
+    const {levelColor, levelImage, levelExplanationFontSize} = this.props;
+
     return (
       <ScrollView
         ref={(scrollView) => this._scrollView = scrollView}
@@ -96,15 +102,15 @@ const AnswerExplanationScreen = React.createClass({
         >
         <Image
           resizeMode='cover'
-          source={require('../../images/bridge.jpg')}
+          source={getLevelImage(levelImage)}
           style={styles.heroImage}
         >
           <Animated.View style={[styles.topGradient, gradientSize]}>
             <LinearGradient
               style={{flex: 1}}
               colors={[
-                transparent.blue(1),
-                transparent.blue(0)
+                transparent[levelColor](1),
+                transparent[levelColor](0)
               ]}
             />
           </Animated.View>
@@ -120,7 +126,7 @@ const AnswerExplanationScreen = React.createClass({
           {this.props.levelExplanation}
         </Text>
         <TouchableOpacity onPress={this.goToNextLevel}>
-          <Text style={styles.nextLevelButton}>
+          <Text style={[styles.nextLevelButton, {color: colors[levelColor]}]}>
             GO TO NEXT CLUE
           </Text>
         </TouchableOpacity>
@@ -166,7 +172,6 @@ const styles = StyleSheet.create({
     ...fonts.medium,
     fontWeight: 'bold',
     backgroundColor: colors.white,
-    color: colors.blue,
     paddingTop: px(40),
     paddingBottom: px(40),
     paddingLeft: px(60),

@@ -22,6 +22,7 @@ const GameView = React.createClass({
     levelWayHint: PropTypes.string.isRequired,
     levelDetailHint: PropTypes.string.isRequired,
     levelExplanation: PropTypes.string.isRequired,
+    levelColor: PropTypes.string.isRequired,
     timeElapsed: PropTypes.number.isRequired,
     isTimerZoomed: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
@@ -40,8 +41,9 @@ const GameView = React.createClass({
   },
 
   render() {
+    const backgroundColor = colors[this.props.levelColor];
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor}]}>
         <ExNavigator
           sceneStyle={{backgroundColor: 'transparent'}}
           showNavigationBar={false}
@@ -63,8 +65,7 @@ const GameView = React.createClass({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: colors.blue
+    flex: 1
   }
 });
 

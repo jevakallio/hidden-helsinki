@@ -14,6 +14,7 @@ const Question = React.createClass({
   propTypes: {
     levelIndex: PropTypes.number.isRequired,
     levelClue: PropTypes.string.isRequired,
+    levelClueFontSize: PropTypes.number.isRequired,
     navigateToAnswerInputScreen: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired
   },
@@ -25,7 +26,7 @@ const Question = React.createClass({
           onPress={this.props.navigateToAnswerInputScreen}
           style={styles.clueContainer}
           >
-          <Text style={styles.clue}>
+          <Text style={[styles.clue, {fontSize: this.props.levelClueFontSize}]}>
             {this.props.levelClue}
           </Text>
           {this.props.levelIndex === 0 &&
