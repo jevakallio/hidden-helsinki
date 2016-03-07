@@ -33,7 +33,7 @@ export default fromJS([
     levelExplanation: 'Apparently Moscow first wanted to gift Helsinki a statue of Lenin, so mayor Ilaskivi said the world peace statue was a defensive victory',
     levelExplanationFontSize: 32,
     levelColor: `yellow`,
-    levelImage: `bridge`
+    levelImage: `birds`
   },
   {
     levelIndex: 2,
@@ -60,8 +60,8 @@ export default fromJS([
     levelDetailHint: `Look for a bronze plaque on the wall at the end of the park. What is the man's name?`,
     levelExplanation: `Waltari's bestselling book, The Egyptian, is so far, the only Finnish novel to be adapted into a Hollywood film`,
     levelExplanationFontSize: 32,
-    levelColor: `blue`,
-    levelImage: `bridge`
+    levelColor: `green`,
+    levelImage: `ripped-jeans`
   },
   {
     levelIndex: 4,
@@ -74,8 +74,8 @@ export default fromJS([
     levelDetailHint: 'Look at the letters on the market hall, try to map them to each other.',
     levelExplanation: `This market hall is scheduled for renovation in 2017, something many residents and vendors object to. Have a look inside, and stop for a coffee on the 2nd floor if you'd like.`,
     levelExplanationFontSize: 32,
-    levelColor: `blue`,
-    levelImage: `bridge`
+    levelColor: `magenta`,
+    levelImage: `tattoo`
   },
   {
     levelIndex: 5,

@@ -15,6 +15,9 @@ const AnswerExplanationScreenContainer = connectGameState(AnswerExplanationScree
 
 export function getQuestionRoute() {
   return {
+    configureScene() {
+      return Navigator.SceneConfigs.FloatFromRight;
+    },
     renderScene(navigator) {
       return (
         <QuestionContainer
@@ -44,7 +47,7 @@ export function getAnswerInputScreenRoute() {
 export function getExplanationRoute() {
   return {
     configureScene() {
-      return Navigator.SceneConfigs.VerticalUpSwipeJump;
+      return Navigator.SceneConfigs.FadeAndroid;
     },
     renderScene(navigator) {
       return (

@@ -50,8 +50,8 @@ const AnswerExplanationScreen = React.createClass({
 
   renderLoadingIndicator() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.answer}>
+      <View style={styles.centered}>
+        <Text style={styles.spinner}>
           ...
         </Text>
       </View>
@@ -122,7 +122,7 @@ const AnswerExplanationScreen = React.createClass({
               />
           </TouchableOpacity>
         </Image>
-        <Text style={styles.answer}>
+        <Text style={[styles.explanation, {fontSize: levelExplanationFontSize}]}>
           {this.props.levelExplanation}
         </Text>
         <TouchableOpacity onPress={this.goToNextLevel}>
@@ -136,6 +136,12 @@ const AnswerExplanationScreen = React.createClass({
 });
 
 const styles = StyleSheet.create({
+  centered: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent'
+  },
   container: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -145,11 +151,17 @@ const styles = StyleSheet.create({
     width: vw(100),
     height: vh(100)
   },
-  answer: {
+  spinner: {
+    position: 'relative',
+    ...fonts.title,
+    fontWeight: 'bold',
+    top: -vh(10)
+  },
+  explanation: {
     ...fonts.medium,
     paddingTop: px(120),
-    paddingLeft: px(40),
-    paddingRight: px(40),
+    paddingLeft: px(80),
+    paddingRight: px(80),
     fontWeight: 'bold'
   },
   topGradient: {
