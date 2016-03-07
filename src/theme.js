@@ -1,14 +1,19 @@
 import {px} from './screen';
+import {reduce, partial} from 'lodash';
 
-export const colors = {
-  magenta: '#F2385A',
-  yellow: '#F5A503',
-  blue: '#4AD9D9',
-  green: '#36B1BF',
-  cream: '#E9F1DF',
-  white: '#FFFFFF',
-  red: '#B01B2C'
+export const transparent = {
+  magenta: partial(rgba, 242, 56, 90),
+  yellow: partial(rgba, 245, 165, 3),
+  cream: partial(rgba, 233, 241, 223),
+  blue: partial(rgba, 74, 217, 217),
+  green: partial(rgba, 54, 177, 191),
+  red: partial(rgba, 176, 27, 44),
+  white: partial(rgba, 255, 255, 255)
 };
+
+export const colors = reduce(transparent, (solids, value, key) => ({
+  ...solids, [key]: value(1)
+}), {});
 
 export const fonts = {
   title: {...baseFont(220), fontWeight: 'bold'},
@@ -24,3 +29,7 @@ function baseFont(size) {
     fontSize: Math.floor(px(size))
   };
 }
+
+function rgba(r, g, b, a) {
+  return `rgba(${r}, ${g}, ${b}, ${a})`;
+};

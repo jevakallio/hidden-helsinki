@@ -50,6 +50,7 @@ export function getExplanationRoute() {
       return (
         <AnswerExplanationScreenContainer
           navigateBack={() => navigator.pop()}
+          navigateToNextLevel={() => navigator.push(getQuestionRoute())}
         />
       );
     }

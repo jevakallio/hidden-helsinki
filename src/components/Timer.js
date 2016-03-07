@@ -1,7 +1,7 @@
 import React from 'react-native';
 import moment from 'moment';
-import {fonts} from '../theme';
-import {px} from '../screen';
+import {fonts, colors} from '../theme';
+import {px, vw, vh} from '../screen';
 const {
   Animated,
   StyleSheet,

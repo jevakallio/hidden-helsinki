@@ -64,7 +64,7 @@ const GameView = React.createClass({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.yellow
+    backgroundColor: colors.blue
   }
 });
 
